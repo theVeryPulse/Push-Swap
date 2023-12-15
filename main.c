@@ -32,7 +32,6 @@ bool	is_invalid_input(char* s)
 	return (*s != '\0');
 }
 
-#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
@@ -40,7 +39,6 @@ int	main(int argc, char **argv)
 	int			i;
 	t_cbl_list	*top_a;
 	t_cbl_list	*top_b;
-	t_cbl_list	*node;
 
 	if (argc != 2 || is_invalid_input(argv[1]))
 		return (0);
@@ -49,12 +47,37 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (str_ary[i] != NULL)
 		list_append(&top_a, ft_atoi(str_ary[i++]));
-	node = top_a;	
-	while (node->next != top_a)
+}
+
+/* Test  */
+void	test_print_list(t_cbl_list *top, char *message_line)
+{
+	ft_putendl_fd(message_line, STDOUT_FILENO);
+	int node_count = get_node_count(top);
+	for (int i = 0; i < node_count; i++)
 	{
-		printf("%d\n", node->value);
-		node = node->next;
+		ft_printf("%d\n", top->value);
+		top = top->next;
 	}
-	printf("%d\n", node->value);
-	printf("Total nodes: %d\n", get_node_count(top_a));
+}
+
+int	main(int argc, char **argv)
+{
+	char		**str_ary;
+	int			i;
+	t_cbl_list	*top_a;
+	t_cbl_list	*top_b;
+
+	if (argc != 2 || is_invalid_input(argv[1]))
+		return (0);
+	str_ary = ft_split(argv[1], ' ');
+	top_a = NULL;
+	i = 0;
+	while (str_ary[i] != NULL)
+		list_append(&top_a, ft_atoi(str_ary[i++]));
+
+	test_print_list(top_a, "A:");
+
+	sa(&top_a);
+	test_print_list(top_a, "A:");
 }
