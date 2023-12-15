@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   basic_list_operations.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/15 16:52:05 by Philip            #+#    #+#             */
+/*   Updated: 2023/12/15 16:52:28 by Philip           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	isolate_node(t_cbl_list *node)
+void	isolate_node(t_cdl_list *node)
 {
 	if (!node)
 		return ;
@@ -8,10 +20,10 @@ void	isolate_node(t_cbl_list *node)
 	node->prev = NULL;
 }
 
-int	get_node_count(t_cbl_list *top)
+int	get_node_count(t_cdl_list *top)
 {
 	int			count;
-	t_cbl_list	*node;
+	t_cdl_list	*node;
 
 	if (top == NULL)
 		return (0);
@@ -28,12 +40,12 @@ int	get_node_count(t_cbl_list *top)
 }
 
 /* Add a node containing (value) to the bottom/tail of the list. */
-void	list_append(t_cbl_list **top, int value)
+void	list_append(t_cdl_list **top, int value)
 {
-	t_cbl_list	*new_node;
-	t_cbl_list	*last_node;
+	t_cdl_list	*new_node;
+	t_cdl_list	*last_node;
 
-	new_node = (t_cbl_list *)malloc(sizeof(t_cbl_list));
+	new_node = (t_cdl_list *)malloc(sizeof(t_cdl_list));
 	if (new_node == NULL)
 		return ;
 	new_node->value = value;
@@ -56,16 +68,18 @@ void	list_append(t_cbl_list **top, int value)
 }
 
 /* Removes and returns the first node of the list.*/
-t_cbl_list	*list_pop(t_cbl_list **top)
+t_cdl_list	*list_pop(t_cdl_list **top)
 {
-	t_cbl_list	*node_to_pop;
+	int			node_count;
+	t_cdl_list	*node_to_pop;
 
 	node_to_pop = *top;
-	if (!top || get_node_count(*top) == 0)
+	node_count = get_node_count(*top);
+	if (!top || node_count == 0)
 		return (NULL);
-	else if (get_node_count(*top) == 1)
+	else if (node_count == 1)
 		*top = NULL;
-	else if (get_node_count(*top) == 2)
+	else if (node_count == 2)
 	{
 		*top = (*top)->next;
 		isolate_node(*top);
@@ -74,18 +88,21 @@ t_cbl_list	*list_pop(t_cbl_list **top)
 	{
 		(*top)->prev->next = (*top)->next;
 		(*top)->next->prev = (*top)->prev;
-		isolate_node(node_to_pop);
 		*top = (*top)->next;
+		isolate_node(node_to_pop);
 	}
 	return (node_to_pop);
 }
-// 0, 1, 2, 3, 4, ...
+
 /* Adds a node to the top/head of the list. */
-void	list_push(t_cbl_list **top, t_cbl_list *node_to_push)
+void	list_push(t_cdl_list **top, t_cdl_list *node_to_push)
 {
-	if (get_node_count(*top) == 0)
+	int	node_count;
+
+	node_count = get_node_count(*top);
+	if (node_count == 0)
 		isolate_node(node_to_push);
-	else if (get_node_count(*top) == 1)
+	else if (node_count == 1)
 	{
 		node_to_push->next = *top;
 		node_to_push->prev = *top;
