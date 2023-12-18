@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 00:40:57 by Philip Li         #+#    #+#             */
-/*   Updated: 2023/12/15 18:21:13 by Philip           ###   ########.fr       */
+/*   Updated: 2023/12/18 01:15:56 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ bool	is_number(char *s)
 	return (*s == '\0');
 }
 
+/* Argument is invalid when
+   1) there is only one number argument;
+   2) any of the argument is not a number; */
 bool	is_invalid_input(int argc, char **argv)
 {
 	int	i;
