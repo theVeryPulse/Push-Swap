@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 00:42:38 by Philip Li         #+#    #+#             */
-/*   Updated: 2023/12/15 17:41:17 by Philip           ###   ########.fr       */
+/*   Updated: 2023/12/22 12:50:42 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include "libft/libft.h"
+
+typedef int t_index;
 
 /* Circular doubly linked list */
 typedef struct s_cdl_list

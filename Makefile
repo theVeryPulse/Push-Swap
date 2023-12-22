@@ -27,6 +27,7 @@ $(NAME): $(LIBFT) $(OBJ)
 $(LIBFT): libft
 	$(MAKE) -C libft
 
+
 clean :
 	rm -f $(OBJ)
 	$(MAKE) -C libft clean
@@ -34,5 +35,14 @@ clean :
 fclean :
 	rm -f $(OBJ) $(NAME)
 	$(MAKE) -C libft fclean
+
+merge: $(LIBFT)
+	cc mains/main_merge_sort.c \
+	main.c operation_push.c \
+	operation_reverse_rotate.c \
+	operation_rotate.c \
+	operation_swap.c \
+	basic_list_operations.c \
+	-L libft/ -l ft -g
 
 .PHONY: all clean fclean 

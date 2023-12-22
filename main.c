@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 00:40:57 by Philip Li         #+#    #+#             */
-/*   Updated: 2023/12/18 01:15:56 by Philip           ###   ########.fr       */
+/*   Updated: 2023/12/22 12:10:36 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ bool	is_invalid_input(int argc, char **argv)
 
 /* int	main(int argc, char **argv)
 {
-	char		**str_ary;
 	int			i;
 	t_cdl_list	*top_a;
 	t_cdl_list	*top_b;
