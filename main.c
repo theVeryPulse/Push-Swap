@@ -6,12 +6,13 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 00:40:57 by Philip Li         #+#    #+#             */
-/*   Updated: 2023/12/29 17:33:11 by Philip           ###   ########.fr       */
+/*   Updated: 2023/12/30 17:15:55 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/* Checks if the list is sorted and the minimal value is at the top. */
 int	is_sorted(t_cdl_list *top)
 {
 	int			node_count;
@@ -118,16 +119,12 @@ int	input_has_duplicates(t_cdl_list **top)
 	return (0);
 }
 
-
-
 int	main(int argc, char **argv)
 {
 	int			i;
 	t_cdl_list	*top_a;
 	t_cdl_list	*top_b;
 
-	if (argc < 2)
-		return (0);
 	if (is_invalid_input(argc, argv))
 		return (error_msg());
 	top_a = NULL;
@@ -140,6 +137,7 @@ int	main(int argc, char **argv)
 		free_list(&top_a);
 		return (error_msg());
 	}
-	
+	if (!is_sorted(top_a))
+		sort(&top_a, &top_b);
 	free_list(&top_a);
 }

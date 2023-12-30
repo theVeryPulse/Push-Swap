@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 00:42:38 by Philip Li         #+#    #+#             */
-/*   Updated: 2023/12/29 17:35:27 by Philip           ###   ########.fr       */
+/*   Updated: 2023/12/30 21:44:34 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void		list_push(t_cdl_list **top, t_cdl_list *node_to_push);
 int			get_node_count(t_cdl_list *top);
 void		isolate_node(t_cdl_list *node);
 void		free_list(t_cdl_list **top);
+int			list_min(t_cdl_list *top);
+int			list_max(t_cdl_list *top);
+
 
 /* Designated operations */
 
@@ -52,10 +55,16 @@ void		rra(t_cdl_list **top_a);
 void		rrb(t_cdl_list **top_b);
 void		rrr(t_cdl_list **top_a, t_cdl_list **top_b);
 
+/* Sort */
+
+void		sort(t_cdl_list **top_a, t_cdl_list **top_b);
+
 /* Miscellaneous */
 
 bool		is_invalid_input(int argc, char **argv);
 int			is_sorted(t_cdl_list *top);
+int			input_has_duplicates(t_cdl_list **top);
+
 int			error_msg(void);
 int			num(char c);
 
