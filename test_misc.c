@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 16:51:13 by Philip            #+#    #+#             */
-/*   Updated: 2023/12/15 16:53:44 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/01 17:08:36 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	test_print_list(t_cdl_list *top, char *message_line)
 		ft_putendl_fd(message_line, STDOUT_FILENO);
 	if (!top)
 		return ;
-	node_count = get_node_count(top);
+	node_count = list_len(top);
 	i = 0;
 	while (i < node_count)
 	{

@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:31:20 by Philip            #+#    #+#             */
-/*   Updated: 2023/12/30 17:28:43 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/01 17:08:36 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_list(t_cdl_list **top)
 
 	if(!top || !(*top))
 		return ;
-	if (get_node_count(*top) == 1)
+	if (list_len(*top) == 1)
 		free(*top);
 	else
 	{
@@ -42,7 +42,7 @@ int	list_min(t_cdl_list *top)
 
 	if (!top)
 		return (0);
-	if (get_node_count(top) == 1)
+	if (list_len(top) == 1)
 		return (top->value);
 	min = top->value;
 	node = top->next;
@@ -62,7 +62,7 @@ int	list_max(t_cdl_list *top)
 
 	if (!top)
 		return (0);
-	if (get_node_count(top) == 1)
+	if (list_len(top) == 1)
 		return (top->value);
 	max = top->value;
 	node = top->next;

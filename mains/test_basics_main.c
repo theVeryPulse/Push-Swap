@@ -7,7 +7,7 @@
 // 		ft_putendl_fd(message_line, STDOUT_FILENO);
 // 	if (!top)
 // 		return ;
-// 	int node_count = get_node_count(top);
+// 	int node_count = list_len(top);
 // 	for (int i = 0; i < node_count; i++)
 // 	{
 // 		ft_printf("\t%d\n", top->value);

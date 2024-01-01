@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 16:52:05 by Philip            #+#    #+#             */
-/*   Updated: 2023/12/29 17:31:15 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/01 17:08:38 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	isolate_node(t_cdl_list *node)
 	node->prev = NULL;
 }
 
-int	get_node_count(t_cdl_list *top)
+int	list_len(t_cdl_list *top)
 {
 	int			count;
 	t_cdl_list	*node;
@@ -49,7 +49,7 @@ void	list_append(t_cdl_list **top, int value)
 	if (new_node == NULL)
 		return ;
 	new_node->value = value;
-	if (get_node_count(*top) == 0)
+	if (list_len(*top) == 0)
 	{
 		*top = new_node;
 		isolate_node(new_node);
@@ -74,7 +74,7 @@ t_cdl_list	*list_pop(t_cdl_list **top)
 	t_cdl_list	*node_to_pop;
 
 	node_to_pop = *top;
-	node_count = get_node_count(*top);
+	node_count = list_len(*top);
 	if (!top || node_count == 0)
 		return (NULL);
 	else if (node_count == 1)
@@ -99,7 +99,7 @@ void	list_push(t_cdl_list **top, t_cdl_list *node_to_push)
 {
 	int	node_count;
 
-	node_count = get_node_count(*top);
+	node_count = list_len(*top);
 	if (node_count == 0)
 		isolate_node(node_to_push);
 	else if (node_count == 1)

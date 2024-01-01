@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 00:42:38 by Philip Li         #+#    #+#             */
-/*   Updated: 2023/12/30 21:44:34 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/01 17:20:02 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@
 # include <limits.h>
 # include "libft/libft.h"
 
-typedef int t_index;
+typedef int	t_index;
 
 /* Circular doubly linked list */
-
 typedef struct s_cdl_list
 {
 	int					value;
@@ -29,17 +28,43 @@ typedef struct s_cdl_list
 	struct s_cdl_list	*next;
 }	t_cdl_list;
 
+/* 4 Rotate cases:
+   - RA_RB
+   - RA_RRB
+   - RRA_RB
+   - RRA_RRB */
+typedef enum e_rotate_case
+{
+	RA_RB,
+	RA_RRB,
+	RRA_RB,
+	RRA_RRB
+}	t_rotate_case;
+
+/* Tracking steps and rotate case */
+typedef struct s_step_track
+{
+	int				node_value;
+	t_rotate_case	rotate_case;
+	int				ra_steps;
+	int				rb_steps;
+	int				rr_steps;
+	int				rra_steps;
+	int				rrb_steps;
+	int				rrr_steps;
+	int				total_steps;
+}	t_step_track;
+
 /* List operations */
 
 void		list_append(t_cdl_list **top, int value);
 t_cdl_list	*list_pop(t_cdl_list **top);
 void		list_push(t_cdl_list **top, t_cdl_list *node_to_push);
-int			get_node_count(t_cdl_list *top);
+int			list_len(t_cdl_list *top);
 void		isolate_node(t_cdl_list *node);
 void		free_list(t_cdl_list **top);
 int			list_min(t_cdl_list *top);
 int			list_max(t_cdl_list *top);
-
 
 /* Designated operations */
 
@@ -59,11 +84,15 @@ void		rrr(t_cdl_list **top_a, t_cdl_list **top_b);
 
 void		sort(t_cdl_list **top_a, t_cdl_list **top_b);
 
-/* Miscellaneous */
+/* Input check */
 
 bool		is_invalid_input(int argc, char **argv);
 int			is_sorted(t_cdl_list *top);
-int			input_has_duplicates(t_cdl_list **top);
+int			list_has_duplicates(t_cdl_list **top);
+int			is_beyond_int(char *s);
+
+
+/* Miscellaneous */
 
 int			error_msg(void);
 int			num(char c);

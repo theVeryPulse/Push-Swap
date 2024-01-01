@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 00:25:39 by Philip Li         #+#    #+#             */
-/*   Updated: 2023/12/22 13:39:45 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/01 17:08:36 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	try_revserse_rotate(t_cdl_list **top);
    The last element becomes the first one.*/
 void	rra(t_cdl_list **top_a)
 {
-	if (get_node_count(*top_a) < 2)
+	if (list_len(*top_a) < 2)
 		return ;
 	ft_putendl_fd("rra", STDOUT_FILENO);
 	*top_a = (*top_a)->prev;
@@ -28,7 +28,7 @@ void	rra(t_cdl_list **top_a)
    The last element becomes the first one. */
 void	rrb(t_cdl_list **top_b)
 {
-	if (get_node_count(*top_b) < 2)
+	if (list_len(*top_b) < 2)
 		return ;
 	ft_putendl_fd("rrb", STDOUT_FILENO);
 	*top_b = (*top_b)->prev;
@@ -44,6 +44,6 @@ void	rrr(t_cdl_list **top_a, t_cdl_list **top_b)
 
 static void	try_revserse_rotate(t_cdl_list **top)
 {
-	if (get_node_count(*top) > 1)
+	if (list_len(*top) > 1)
 		*top = (*top)->prev;
 }

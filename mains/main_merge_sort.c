@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:46:02 by Philip            #+#    #+#             */
-/*   Updated: 2023/12/22 22:23:37 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/01 17:08:36 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	main(int argc, char **argv)
 
 	/* Hybrid sort */
 	/* Experiment: 32 numbers */
-	int size = get_node_count(top_a);
+	int size = list_len(top_a);
 	merge_sort(&top_a, &top_b, size);
 
 }
