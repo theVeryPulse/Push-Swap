@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 18:18:13 by Philip            #+#    #+#             */
-/*   Updated: 2023/12/30 21:41:49 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/01 16:13:49 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ void	push_to_sorted_a(t_cdl_list **top_a, t_cdl_list **top_b)
 		return ;
 	while (get_node_count(*top_b) > 0)
 	{
-		if ((*top_b)->value < (*top_a)->value && (*top_b)->value > (*top_a)->prev->value
+		if (((*top_b)->value < (*top_a)->value && (*top_b)->value > (*top_a)->prev->value)
 			|| ((*top_b)->value > list_max(*top_a) && (*top_a)->prev->value == list_max(*top_a))
 			|| ((*top_b)->value < list_min(*top_a) && (*top_a)->value == list_min(*top_a)))
 			pa(top_a, top_b);
 		else
-			ra(top_a);
+			rra(top_a);
 	}
 }
 
@@ -159,6 +159,7 @@ typedef enum e_rotate_case t_rotate_case;
 struct	s_step_track
 {
 	int				node_value;
+	t_rotate_case	rotate_case;
 	int				ra_steps;
 	int				rb_steps;
 	int				rr_steps;
@@ -166,14 +167,41 @@ struct	s_step_track
 	int				rrb_steps;
 	int				rrr_steps;
 	int				total_steps;
-	t_rotate_case	rotate_case;
 };
 /* Tracking steps and rotate case */
 typedef struct s_step_track t_step_track;
 
+// int	ready_for_pb(t_cdl_list *top_a, t_cdl_list *top_b)
+// {
+// 	if (!top_a || !top_b)
+// 		return (-1);
+
+// 	int	b_i;
+// 	int	correct_top_b_val_for_pb;
+// 	t_cdl_list	*node_b;
+// 	b_i = 0;
+// 	node_b = top_b;
+// 	correct_top_b_val_for_pb = top_b->value;
+// 	while (b_i < get_node_count(top_b))
+// 	{
+// 		if (top_a->value > top_b->value
+// 			&& top_a->value < top_b->prev->value
+// 			&& )
+// 		{
+
+// 		}
+// 		node_b = node_b->next;
+// 		b_i++;
+// 	}
+
+// 	if ((top_a->value > top_b->value && top_a->value < top_b->prev->value)
+// 		|| (top_a->value > list_max(top_b) && top_b->value == list_max(top_b))
+// 		|| (top_a->value < list_min(top_b) && top_b->value == list_max(top_b)))
+// }
+/* 15 12 8 1 10 20 16 17 11 5 14 18 13 2 19 9 7 3 6 4  */
 /* 
-   When calling the function, there should be more than 3 nodes in list a,
-   2 nodes in descending order in list b.
+   When calling the function, there should be more than 3 nodes in list a and
+   exactly 2 nodes in descending order in list b.
    
    Information for pushing cheapest node:
    - total steps for pushing
@@ -183,6 +211,7 @@ typedef struct s_step_track t_step_track;
 void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 {
 	t_step_track	step_track;
+	t_step_track	target_rotates;
 	t_cdl_list		*node_a;
 	t_cdl_list		*node_b;
 	t_index			a_i;
@@ -193,16 +222,19 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 	/* Find the cheapest node */
 	a_i = 0;
 	node_a = *top_a;
-	step_track.total_steps = INT_MAX;
-
+	target_rotates.total_steps = INT_MAX;
+	/* 15 12 8 1 10 20 16 17 11 5 14 18 13 2 19 9 7 3 6 4  */
 	/* For each node(value) in list a */
 	while (a_i < get_node_count(*top_a))
 	{
 		/* ra rb ================================= */
-		step_track.ra_steps = a_i;
-		step_track.rb_steps = 0;
-		step_track.rr_steps = 0;
-
+		step_track = (t_step_track)
+		{
+			.rotate_case = RA_RB,
+			.ra_steps = a_i,
+			.rb_steps = 0,
+			.rr_steps = 0,
+		};
 		b_i = 0;
 		node_b = *top_b;
 
@@ -222,20 +254,25 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 			step_track.ra_steps--;
 			step_track.rb_steps--;
 		}
-		if (step_track.ra_steps + step_track.rb_steps + step_track.rr_steps 
-			< step_track.total_steps)
+		step_track.total_steps = step_track.ra_steps + step_track.rb_steps + step_track.rr_steps;
+		if (step_track.total_steps < target_rotates.total_steps)
 		{
-			step_track.node_value = node_a->value;
-			step_track.total_steps = step_track.ra_steps + step_track.rb_steps + step_track.rr_steps;
-			step_track.rotate_case = RA_RB;
+			target_rotates = step_track;
+			target_rotates.node_value = node_a->value;
 		}
 
 		/* ra rrb ================================= */
-		step_track.ra_steps = a_i;
+		step_track = (t_step_track)
+		{
+			.rotate_case = RA_RRB,
+			.ra_steps = a_i,
+			.rrb_steps = 0,
+		};
+		// step_track.ra_steps = a_i;
 
 		b_i = 0;
 		node_b = *top_b;
-		step_track.rrb_steps = 0;
+		// step_track.rrb_steps = 0;
 
 		while (b_i < get_node_count(*top_b))
 		{
@@ -247,19 +284,25 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 			node_b = node_b->prev;
 			step_track.rrb_steps++;
 		}
-		if (step_track.ra_steps + step_track.rrb_steps < step_track.total_steps)
+		step_track.total_steps = step_track.ra_steps + step_track.rrb_steps;
+		if (step_track.total_steps < target_rotates.total_steps)
 		{
-			step_track.node_value = node_a->value;
-			step_track.total_steps = step_track.ra_steps + step_track.rrb_steps;
-			step_track.rotate_case = RA_RRB;
+			target_rotates = step_track;
+			target_rotates.node_value = node_a->value;
 		}
 
 		/* rra rb [0, 1, 2, 3] ================================= */
-		step_track.rra_steps = get_node_count(node_a) - a_i;
+		step_track = (t_step_track)
+		{
+			.rotate_case = RRA_RB,
+			.rra_steps = get_node_count(node_a) - a_i,
+			.rb_steps = 0,
+		};
+		// step_track.rra_steps = get_node_count(node_a) - a_i;
 
 		b_i = 0;
 		node_b = *top_b;
-		step_track.rb_steps = 0;
+		// step_track.rb_steps = 0;
 
 		while (b_i < get_node_count(*top_b))
 		{
@@ -271,18 +314,24 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 			node_b = node_b->next;
 			step_track.rb_steps++;
 		}
-		if (step_track.rra_steps + step_track.rb_steps < step_track.total_steps)
+		step_track.total_steps = step_track.rra_steps + step_track.rb_steps;
+		if (step_track.total_steps < target_rotates.total_steps)
 		{
+			target_rotates = step_track;
 			step_track.node_value = node_a->value;
-			step_track.total_steps = step_track.rra_steps + step_track.rb_steps;
-			step_track.rotate_case = RRA_RB;
 		}
 
 
 		/* rra rrb ================================= */
-		step_track.rra_steps = get_node_count(node_a) - a_i;
-		step_track.rrb_steps = 0;
-		step_track.rrr_steps = 0;
+		step_track = (t_step_track)
+		{
+			.rotate_case = RRA_RRB,
+			.rra_steps = get_node_count(node_a) - a_i,
+			.rrb_steps = 0
+		};
+		// step_track.rra_steps = get_node_count(node_a) - a_i;
+		// step_track.rrb_steps = 0;
+		// step_track.rrr_steps = 0;
 
 		b_i = 0;
 		node_b = *top_b;
@@ -303,11 +352,14 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 			step_track.rra_steps--;
 			step_track.rrb_steps--;
 		}
-		if (step_track.rra_steps + step_track.rrb_steps + step_track.rrr_steps < step_track.total_steps)
+		/* Possible refactor: total_steps(&step_track) */
+		step_track.total_steps = step_track.rra_steps + step_track.rrb_steps + step_track.rrr_steps;
+		if (step_track.total_steps < target_rotates.total_steps)
 		{
+			target_rotates = step_track;
 			step_track.node_value = node_a->value;
-			step_track.total_steps = step_track.rra_steps + step_track.rrb_steps + step_track.rrr_steps;
-			step_track.rotate_case = RRA_RRB;
+			// step_track.total_steps = step_track.rra_steps + step_track.rrb_steps + step_track.rrr_steps;
+			// step_track.rotate_case = RRA_RRB;
 		}
 
 		a_i++;
@@ -315,14 +367,70 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 	}
 	
 	/* Push the cheapest node */
-	if (step_track.rotate_case == RA_RB || step_track.rotate_case == RA_RRB)
+	if (target_rotates.rotate_case == RA_RB)
 	{
-		while ((*top_a)->value != step_track.node_value)
+		while (target_rotates.rr_steps)
+		{
+			rr(top_a, top_b);
+			target_rotates.rr_steps--;
+		}
+		while (target_rotates.ra_steps)
 		{
 			ra(top_a);
+			target_rotates.ra_steps--;
 		}
-		
+		while (target_rotates.rb_steps)
+		{
+			rb(top_b);
+			target_rotates.rb_steps--;
+		}
 	}
+	if (target_rotates.rotate_case == RA_RRB)
+	{
+		while (target_rotates.ra_steps)
+		{
+			ra(top_a);
+			target_rotates.ra_steps--;
+		}
+		while (target_rotates.rrb_steps)
+		{
+			rrb(top_b);
+			target_rotates.rrb_steps--;
+		}
+	}
+	if (target_rotates.rotate_case == RRA_RB)
+	{
+		while (target_rotates.rra_steps)
+		{
+			rra(top_a);
+			target_rotates.rra_steps--;
+		}
+		while (target_rotates.rb_steps)
+		{
+			rb(top_b);
+			target_rotates.rb_steps--;
+		}
+	}
+	if (target_rotates.rotate_case == RRA_RRB)
+	{
+		while (target_rotates.rrr_steps)
+		{
+			rrr(top_a, top_b);
+			target_rotates.rrr_steps--;
+		}
+		while (target_rotates.rra_steps)
+		{
+			rra(top_a);
+			target_rotates.rra_steps--;
+		}
+		while (target_rotates.rrb_steps)
+		{
+			rrb(top_b);
+			target_rotates.rrb_steps--;
+		}
+	}
+	pb(top_a, top_b);
+	
 }
 
 void	sort(t_cdl_list **top_a, t_cdl_list **top_b)
