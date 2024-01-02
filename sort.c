@@ -63,15 +63,36 @@ void	sort_three_nodes_a(t_cdl_list **top_a)
 	}
 }
 
+bool	sort_push_ok(t_cdl_list *src, t_cdl_list *dst)
+{
+	int		dst_max;
+	int		dst_min;
+	bool	push_ready;
+
+	if (!src || !dst)
+		return (false);
+	dst_max = list_max(dst);
+	dst_min = list_min(dst);
+	push_ready = 
+	(
+		(src->value > dst->value && src->value < dst->prev->value)
+		|| (src->value > dst_max && dst->value == dst_max)
+		|| (src->value < dst_min && dst->value == dst_min)
+	);
+	return (push_ready)
+}
+
 void	push_to_sorted_a(t_cdl_list **top_a, t_cdl_list **top_b)
 {
 	if (!top_a || !top_b || !(*top_a) || !(*top_b))
 		return ;
 	while (list_len(*top_b) > 0)
 	{
-		if (((*top_b)->value < (*top_a)->value && (*top_b)->value > (*top_a)->prev->value)
+		/* if (((*top_b)->value < (*top_a)->value && (*top_b)->value > (*top_a)->prev->value)
 			|| ((*top_b)->value > list_max(*top_a) && (*top_a)->prev->value == list_max(*top_a))
 			|| ((*top_b)->value < list_min(*top_a) && (*top_a)->value == list_min(*top_a)))
+			pa(top_a, top_b); */
+		if (sort_push_ok(*top_b, *top_a))
 			pa(top_a, top_b);
 		else
 			rra(top_a);
@@ -182,9 +203,10 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 
 		while (b_i < len_b)
 		{
-			if ((node_a->value > node_b->value && node_a->value < node_b->prev->value)
+			/* if ((node_a->value > node_b->value && node_a->value < node_b->prev->value)
 				|| (node_a->value > list_max(node_b) && node_b->value == list_max(node_b))
-				|| (node_a->value < list_min(node_b) && node_b->value == list_max(node_b)))
+				|| (node_a->value < list_min(node_b) && node_b->value == list_max(node_b))) */
+			if (sort_push_ok(node_a, node_b))	
 				break;
 			b_i++;
 			node_b = node_b->next;
@@ -214,9 +236,10 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 		node_b = *top_b;
 		while (b_i < len_b)
 		{
-			if ((node_a->value > node_b->value && node_a->value < node_b->prev->value)
+/* 			if ((node_a->value > node_b->value && node_a->value < node_b->prev->value)
 				|| (node_a->value > list_max(node_b) && node_b->value == list_max(node_b))
-				|| (node_a->value < list_min(node_b) && node_b->value == list_max(node_b)))
+				|| (node_a->value < list_min(node_b) && node_b->value == list_max(node_b))) */
+			if (sort_push_ok(node_a, node_b))	
 				break;
 			b_i++;
 			node_b = node_b->prev;
@@ -240,9 +263,10 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 		node_b = *top_b;
 		while (b_i < len_b)
 		{
-			if ((node_a->value > node_b->value && node_a->value < node_b->prev->value)
+/* 			if ((node_a->value > node_b->value && node_a->value < node_b->prev->value)
 				|| (node_a->value > list_max(node_b) && node_b->value == list_max(node_b))
-				|| (node_a->value < list_min(node_b) && node_b->value == list_max(node_b)))
+				|| (node_a->value < list_min(node_b) && node_b->value == list_max(node_b))) */
+			if (sort_push_ok(node_a, node_b))	
 				break;
 			b_i++;
 			node_b = node_b->next;
@@ -267,9 +291,10 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 		node_b = *top_b;
 		while (b_i < len_b)
 		{
-			if ((node_a->value > node_b->value && node_a->value < node_b->prev->value)
+		/* 	if ((node_a->value > node_b->value && node_a->value < node_b->prev->value)
 				|| (node_a->value > list_max(node_b) && node_b->value == list_max(node_b))
-				|| (node_a->value < list_min(node_b) && node_b->value == list_max(node_b)))
+				|| (node_a->value < list_min(node_b) && node_b->value == list_max(node_b))) */
+			if (sort_push_ok(node_a, node_b))	
 				break;
 			b_i++;
 			node_b = node_b->prev;
@@ -311,7 +336,7 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 			target_rotates.rb_steps--;
 		}
 	}
-	if (target_rotates.rotate_case == RA_RRB)
+	else if (target_rotates.rotate_case == RA_RRB)
 	{
 		while (target_rotates.ra_steps)
 		{
@@ -324,7 +349,7 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 			target_rotates.rrb_steps--;
 		}
 	}
-	if (target_rotates.rotate_case == RRA_RB)
+	else if (target_rotates.rotate_case == RRA_RB)
 	{
 		while (target_rotates.rra_steps)
 		{
@@ -337,7 +362,7 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 			target_rotates.rb_steps--;
 		}
 	}
-	if (target_rotates.rotate_case == RRA_RRB)
+	else
 	{
 		while (target_rotates.rrr_steps)
 		{
