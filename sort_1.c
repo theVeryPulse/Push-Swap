@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:12:34 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/03 16:53:35 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/03 20:29:21 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	sort_five_nodes(t_cdl_list **top_a, t_cdl_list **top_b)
 	bring_min_to_top_a(top_a);
 }
 
+/*  Note:
+    - For better performance, this sort uses a simpler sort when stack B is 
+      over 10 timers larger than stack A. */
 void	sort_more_than_five_nodes(t_cdl_list **top_a, t_cdl_list **top_b)
 {
 	if (!top_a || !(*top_a))
@@ -44,7 +47,7 @@ void	push_to_sorted_a(t_cdl_list **top_a, t_cdl_list **top_b)
 		return ;
 	while (list_len(*top_b) > 0)
 	{
-		if (sort_push_ok(*top_b, *top_a, ASCENDING))
+		if (sort_push_ok(*top_b, *top_a, ASCENDING, NULL))
 			pa(top_a, top_b);
 		else
 			rra(top_a);
@@ -89,11 +92,11 @@ void	push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b)
 		return ;
 	target.total_steps = INT_MAX;
 	li = (t_lists_info){.a_i = 0, .node_a = *top_a, .node_b = *top_b,
-		.len_a = list_len(*top_a), .len_b = list_len(*top_b)};
+		.len_a = list_len(*top_a), .len_b = list_len(*top_b),
+		.dst_max = list_max(*top_b), .dst_min = list_min(*top_b)};
 	while (li.a_i < li.len_a)
 	{
-		if (likely_to_have_better_solutions(li))
-			calc_push_steps(li, &st, &target);
+		calc_push_steps(li, &st, &target);
 		next_node_index_add_one(&(li.node_a), &(li.a_i));
 	}
 	rotate_and_pb(target, top_a, top_b);

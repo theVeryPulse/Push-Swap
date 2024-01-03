@@ -6,24 +6,11 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:18:36 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/03 18:34:46 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/03 20:12:09 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-bool	less_likely_to_have_better_solutions(t_lists_info li)
-{
-	int	margin;
-
-	margin = (li.len_a + li.len_b) / 10;
-	return (li.a_i > margin && li.a_i < li.len_a - margin);
-}
-
-bool	likely_to_have_better_solutions(t_lists_info li)
-{
-	return (!less_likely_to_have_better_solutions(li));
-}
 
 void	calc_push_steps(t_lists_info li, t_step_track *st, t_step_track *target)
 {
@@ -31,19 +18,19 @@ void	calc_push_steps(t_lists_info li, t_step_track *st, t_step_track *target)
 		return ;
 	*st = (t_step_track){
 		.rotate_case = RA_RB, .ra_steps = li.a_i};
-	ra_rb_step_calc(st, li.node_a, li.node_b, li.len_b);
+	ra_rb_step_calc(st, li);
 	update_total_steps(st, target);
 	*st = (t_step_track){
 		.rotate_case = RA_RRB, .ra_steps = li.a_i};
-	ra_rrb_step_calc(st, li.node_a, li.node_b, li.len_b);
+	ra_rrb_step_calc(st, li);
 	update_total_steps(st, target);
 	*st = (t_step_track){
 		.rotate_case = RRA_RB, .rra_steps = li.len_a - li.a_i};
-	rra_rb_step_calc(st, li.node_a, li.node_b, li.len_b);
+	rra_rb_step_calc(st, li);
 	update_total_steps(st, target);
 	*st = (t_step_track){
 		.rotate_case = RRA_RRB, .rra_steps = li.len_a - li.a_i};
-	rra_rrb_step_calc(st, li.node_a, li.node_b, li.len_b);
+	rra_rrb_step_calc(st, li);
 	update_total_steps(st, target);
 }
 

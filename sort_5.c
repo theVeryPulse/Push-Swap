@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:15:43 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/03 16:15:54 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/03 19:57:00 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,18 @@ void	ra_rra_step_calc(t_step_track *st, t_lists_info *li, t_cdl_list **top_a,
 	li->node_a = *top_a;
 	li->a_i = 0;
 	li->len_a = list_len(li->node_a);
-	while (li->a_i < li->len_a && !sort_push_ok(*top_b, li->node_a, ASCENDING))
+	li->dst_max = list_max(li->node_a);
+	li->dst_min = list_min(li->node_a);
+	while (li->a_i < li->len_a
+		&& !sort_push_ok(*top_b, li->node_a, ASCENDING, li))
 	{
 		ordered_rotate__node_step_index(&(li->node_a), &(st->ra_steps),
 			&(li->a_i));
 	}
 	li->node_a = *top_a;
 	li->a_i = 0;
-	while (li->a_i < li->len_a && !sort_push_ok(*top_b, li->node_a, ASCENDING))
+	while (li->a_i < li->len_a
+		&& !sort_push_ok(*top_b, li->node_a, ASCENDING, li))
 	{
 		reversed_rotate__node_step_index(&li->node_a, &st->rra_steps,
 			&(li->a_i));

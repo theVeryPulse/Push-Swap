@@ -6,13 +6,18 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:26:48 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/02 23:35:10 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/03 20:25:12 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	sort_push_ok(t_cdl_list *src, t_cdl_list *dst, t_order order)
+/*  Note:
+    - (t_lists_info *li) is sent in as a container for (dst_max) and 
+      (dst_min) when they are not changed within a loop. Alternatively, send in 
+      NULL for function to calculate these values. */
+bool	sort_push_ok(t_cdl_list *src, t_cdl_list *dst, t_order order,
+		t_lists_info *li)
 {
 	int		dst_max;
 	int		dst_min;
@@ -20,8 +25,16 @@ bool	sort_push_ok(t_cdl_list *src, t_cdl_list *dst, t_order order)
 
 	if (!src)
 		return (false);
-	dst_max = list_max(dst);
-	dst_min = list_min(dst);
+	if (li)
+	{
+		dst_max = li->dst_max;
+		dst_min = li->dst_min;
+	}
+	else
+	{
+		dst_max = list_max(dst);
+		dst_min = list_min(dst);
+	}
 	if (order == DESCENDING)
 		push_ready = ((src->value > dst->value && src->value < dst->prev->value)
 				|| (src->value > dst_max && dst->value == dst_max)
@@ -33,8 +46,8 @@ bool	sort_push_ok(t_cdl_list *src, t_cdl_list *dst, t_order order)
 	return (push_ready);
 }
 
-/* Calculates the total steps for a specific rotating case. It assumes all 
-   irrelevant items (fields) are set to zeros. */
+/*  Calculates the total steps for a specific rotating case. It assumes all 
+    irrelevant items (fields) are set to zeros. */
 void	calc_total_steps(t_step_track *track)
 {
 	if (!track)
