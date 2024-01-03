@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 17:11:50 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/01 17:19:41 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/03 21:46:34 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
    Allows for one '-' or one '+' in front of the digits. */
 static bool	is_number(char *s)
 {
-	if (!s)
+	if (!s || *s == '\0')
 		return (false);
 	if (*s == '-' || *s == '+')
 		s++;
