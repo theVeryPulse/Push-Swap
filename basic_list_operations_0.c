@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 16:52:05 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/01 17:08:38 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/02 23:50:12 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ void	list_append(t_cdl_list **top, int value)
 /* Removes and returns the first node of the list.*/
 t_cdl_list	*list_pop(t_cdl_list **top)
 {
-	int			node_count;
+	int			len;
 	t_cdl_list	*node_to_pop;
 
 	node_to_pop = *top;
-	node_count = list_len(*top);
-	if (!top || node_count == 0)
+	len = list_len(*top);
+	if (!top || len == 0)
 		return (NULL);
-	else if (node_count == 1)
+	else if (len == 1)
 		*top = NULL;
-	else if (node_count == 2)
+	else if (len == 2)
 	{
 		*top = (*top)->next;
 		isolate_node(*top);
@@ -97,12 +97,12 @@ t_cdl_list	*list_pop(t_cdl_list **top)
 /* Adds a node to the top/head of the list. */
 void	list_push(t_cdl_list **top, t_cdl_list *node_to_push)
 {
-	int	node_count;
+	int	len;
 
-	node_count = list_len(*top);
-	if (node_count == 0)
+	len = list_len(*top);
+	if (len == 0)
 		isolate_node(node_to_push);
-	else if (node_count == 1)
+	else if (len == 1)
 	{
 		node_to_push->next = *top;
 		node_to_push->prev = *top;

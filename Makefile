@@ -5,13 +5,19 @@ CFLAGS := -Wall -Wextra -Werror
 SRC := main.c \
 	basic_list_operations_0.c \
 	basic_list_operations_1.c \
+	input_check.c \
 	\
 	operation_push.c \
 	operation_reverse_rotate.c \
 	operation_rotate.c \
 	operation_swap.c \
 	\
-	sort.c \
+	sort_0.c \
+	sort_1.c \
+	sort_2.c \
+	sort_3.c \
+	sort_4.c \
+	\
 	misc.c
 
 OBJ := $(SRC:.c=.o)

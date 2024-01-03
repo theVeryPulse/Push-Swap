@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:31:20 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/01 17:08:36 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/02 23:32:51 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_list(t_cdl_list **top)
 {
 	t_cdl_list	*node;
 
-	if(!top || !(*top))
+	if (!top || !(*top))
 		return ;
 	if (list_len(*top) == 1)
 		free(*top);
@@ -54,6 +54,7 @@ int	list_min(t_cdl_list *top)
 	}
 	return (min);
 }
+
 /* Returns the maximum value stored in the list. */
 int	list_max(t_cdl_list *top)
 {

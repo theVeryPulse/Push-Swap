@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 00:42:38 by Philip Li         #+#    #+#             */
-/*   Updated: 2024/01/01 17:20:02 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/02 23:57:39 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef int	t_index;
 
-/* Circular doubly linked list */
+/* Circular Doubly Linked list */
 typedef struct s_cdl_list
 {
 	int					value;
@@ -28,11 +28,6 @@ typedef struct s_cdl_list
 	struct s_cdl_list	*next;
 }	t_cdl_list;
 
-/* 4 Rotate cases:
-   - RA_RB
-   - RA_RRB
-   - RRA_RB
-   - RRA_RRB */
 typedef enum e_rotate_case
 {
 	RA_RB,
@@ -41,10 +36,10 @@ typedef enum e_rotate_case
 	RRA_RRB
 }	t_rotate_case;
 
-/* Tracking steps and rotate case */
+/* Note: 'rotate_case' item is not used for the algorithm, but helps to
+   improve readability. */
 typedef struct s_step_track
 {
-	int				node_value;
 	t_rotate_case	rotate_case;
 	int				ra_steps;
 	int				rb_steps;
@@ -55,7 +50,22 @@ typedef struct s_step_track
 	int				total_steps;
 }	t_step_track;
 
-/* List operations */
+typedef enum e_order
+{
+	ASCENDING,
+	DESCENDING
+}	t_order;
+
+typedef struct s_lists_info
+{
+	t_index		a_i;
+	t_cdl_list	*node_a;
+	t_cdl_list	*node_b;
+	int			len_a;
+	int			len_b;
+}	t_lists_info;
+
+/* List operations ========================================================== */
 
 void		list_append(t_cdl_list **top, int value);
 t_cdl_list	*list_pop(t_cdl_list **top);
@@ -66,7 +76,14 @@ void		free_list(t_cdl_list **top);
 int			list_min(t_cdl_list *top);
 int			list_max(t_cdl_list *top);
 
-/* Designated operations */
+/* Input check ============================================================== */
+
+bool		is_invalid_input(int argc, char **argv);
+int			is_sorted(t_cdl_list *top);
+int			list_has_duplicates(t_cdl_list **top);
+int			is_beyond_int(char *s);
+
+/* Designated operations ==================================================== */
 
 void		sa(t_cdl_list **top_a);
 void		sb(t_cdl_list **top_b);
@@ -80,25 +97,44 @@ void		rra(t_cdl_list **top_a);
 void		rrb(t_cdl_list **top_b);
 void		rrr(t_cdl_list **top_a, t_cdl_list **top_b);
 
-/* Sort */
+/* Sorting related ========================================================== */
 
-void		sort(t_cdl_list **top_a, t_cdl_list **top_b);
-
-/* Input check */
-
-bool		is_invalid_input(int argc, char **argv);
+void		all_ordered_rotates(t_step_track st, t_cdl_list **top_a,
+				t_cdl_list **top_b);
+void		all_reverse_rotates(t_step_track st, t_cdl_list **top_a,
+				t_cdl_list **top_b);
+void		bring_min_to_top_a(t_cdl_list **top_a);
+void		calc_push_steps(t_lists_info li, t_step_track *st,
+				t_step_track *target);
+void		calc_total_steps(t_step_track *track);
 int			is_sorted(t_cdl_list *top);
-int			list_has_duplicates(t_cdl_list **top);
-int			is_beyond_int(char *s);
+bool		less_likely_to_have_better_solutions(t_lists_info li);
+bool		likely_to_have_better_solutions(t_lists_info li);
+void		next_node_index_add_one(t_cdl_list **node, int *i);
+void		push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b);
+void		push_to_sorted_a(t_cdl_list **top_a, t_cdl_list **top_b);
+void		ra_rb_step_calc(t_step_track *st, t_cdl_list *node_a,
+				t_cdl_list *node_b, int len_b);
+void		ra_rrb_step_calc(t_step_track *st, t_cdl_list *node_a,
+				t_cdl_list *node_b, int len_b);
+void		rotate_and_pb(t_step_track target, t_cdl_list **top_a,
+				t_cdl_list **top_b);
+void		rra_rb_step_calc(t_step_track *st, t_cdl_list *node_a,
+				t_cdl_list *node_b, int len_b);
+void		rra_rrb_step_calc(t_step_track *st, t_cdl_list *node_a,
+				t_cdl_list *node_b, int len_b);
+void		sort(t_cdl_list **top_a, t_cdl_list **top_b);
+void		sort_five_nodes(t_cdl_list **top_a, t_cdl_list **top_b);
+void		sort_four_nodes(t_cdl_list **top_a, t_cdl_list **top_b);
+void		sort_two_nodes_a(t_cdl_list **top_a);
+void		sort_three_nodes_a(t_cdl_list **top_a);
+void		sort_more_than_five_nodes(t_cdl_list **top_a, t_cdl_list **top_b);
+bool		sort_push_ok(t_cdl_list *src, t_cdl_list *dst, t_order order);
+void		update_total_steps(t_step_track *step_track, t_step_track *target);
 
-
-/* Miscellaneous */
+/* Miscellaneous ------------------------------------------------------------ */
 
 int			error_msg(void);
 int			num(char c);
-
-/* Test */
-
-void		test_print_list(t_cdl_list *top, char *message_line);
 
 #endif
