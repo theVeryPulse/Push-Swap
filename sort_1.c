@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:12:34 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/02 23:48:40 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/03 16:53:35 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ void	sort_more_than_five_nodes(t_cdl_list **top_a, t_cdl_list **top_b)
 {
 	if (!top_a || !(*top_a))
 		return ;
-	pb(top_a, top_b);
-	pb(top_a, top_b);
-	while (list_len(*top_a) > 3)
+	pb_n_times(top_a, top_b, 2);
+	while (list_len(*top_a) > 3 && list_len(*top_a) * 10 > list_len(*top_b))
 		push_cheapest_node(top_a, top_b);
-	sort_three_nodes_a(top_a);
+	if (list_len(*top_a) > 3)
+		sort_the_rest(top_a, top_b);
+	else
+		sort_three_nodes_a(top_a);
 	push_to_sorted_a(top_a, top_b);
 	bring_min_to_top_a(top_a);
 }

@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:23:44 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/02 23:26:38 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/03 18:35:47 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	ra_rb_step_calc(t_step_track *st, t_cdl_list *node_a,
 	b_i = 0;
 	while (b_i < len_b && !sort_push_ok(node_a, node_b, DESCENDING))
 	{
-		b_i++;
-		node_b = node_b->next;
-		st->rb_steps++;
+		ordered_rotate__node_step_index(&node_b, &(st->rb_steps), &b_i);
 	}
 	calc_total_steps(st);
 }
@@ -39,9 +37,7 @@ void	ra_rrb_step_calc(t_step_track *st, t_cdl_list *node_a,
 	b_i = 0;
 	while (b_i < len_b && !sort_push_ok(node_a, node_b, DESCENDING))
 	{
-		b_i++;
-		node_b = node_b->prev;
-		st->rrb_steps++;
+		reversed_rotate__node_step_index(&node_b, &(st->rrb_steps), &b_i);
 	}
 	calc_total_steps(st);
 }
@@ -56,9 +52,7 @@ void	rra_rb_step_calc(t_step_track *st, t_cdl_list *node_a,
 	b_i = 0;
 	while (b_i < len_b && !sort_push_ok(node_a, node_b, DESCENDING))
 	{
-		b_i++;
-		node_b = node_b->next;
-		st->rb_steps++;
+		ordered_rotate__node_step_index(&node_b, &(st->rb_steps), &b_i);
 	}
 	calc_total_steps(st);
 }
@@ -73,9 +67,7 @@ void	rra_rrb_step_calc(t_step_track *st, t_cdl_list *node_a,
 	b_i = 0;
 	while (b_i < len_b && !sort_push_ok(node_a, node_b, DESCENDING))
 	{
-		b_i++;
-		node_b = node_b->prev;
-		st->rrb_steps++;
+		reversed_rotate__node_step_index(&node_b, &(st->rrb_steps), &b_i);
 	}
 	calc_total_steps(st);
 }

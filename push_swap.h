@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 00:42:38 by Philip Li         #+#    #+#             */
-/*   Updated: 2024/01/02 23:57:39 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/03 18:33:29 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,19 @@ int			is_sorted(t_cdl_list *top);
 bool		less_likely_to_have_better_solutions(t_lists_info li);
 bool		likely_to_have_better_solutions(t_lists_info li);
 void		next_node_index_add_one(t_cdl_list **node, int *i);
+void		ordered_rotate__node_step_index(t_cdl_list **node, int *step,
+				int *i);
+void		pb_n_times(t_cdl_list **top_a, t_cdl_list **top_b, int n);
 void		push_cheapest_node(t_cdl_list **top_a, t_cdl_list **top_b);
 void		push_to_sorted_a(t_cdl_list **top_a, t_cdl_list **top_b);
 void		ra_rb_step_calc(t_step_track *st, t_cdl_list *node_a,
 				t_cdl_list *node_b, int len_b);
+void		ra_rra_step_calc(t_step_track *st, t_lists_info *li,
+				t_cdl_list **top_a, t_cdl_list **top_b);
 void		ra_rrb_step_calc(t_step_track *st, t_cdl_list *node_a,
 				t_cdl_list *node_b, int len_b);
+void		reversed_rotate__node_step_index(t_cdl_list **node, int *step,
+				int *i);
 void		rotate_and_pb(t_step_track target, t_cdl_list **top_a,
 				t_cdl_list **top_b);
 void		rra_rb_step_calc(t_step_track *st, t_cdl_list *node_a,
@@ -126,8 +133,9 @@ void		rra_rrb_step_calc(t_step_track *st, t_cdl_list *node_a,
 void		sort(t_cdl_list **top_a, t_cdl_list **top_b);
 void		sort_five_nodes(t_cdl_list **top_a, t_cdl_list **top_b);
 void		sort_four_nodes(t_cdl_list **top_a, t_cdl_list **top_b);
-void		sort_two_nodes_a(t_cdl_list **top_a);
+void		sort_the_rest(t_cdl_list **top_a, t_cdl_list **top_b);
 void		sort_three_nodes_a(t_cdl_list **top_a);
+void		sort_two_nodes_a(t_cdl_list **top_a);
 void		sort_more_than_five_nodes(t_cdl_list **top_a, t_cdl_list **top_b);
 bool		sort_push_ok(t_cdl_list *src, t_cdl_list *dst, t_order order);
 void		update_total_steps(t_step_track *step_track, t_step_track *target);

@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 13:38:04 by juli              #+#    #+#             */
-/*   Updated: 2024/01/01 17:08:36 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/03 13:21:21 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	try_swap(t_cdl_list **top);
    Do nothing if there is only one or no elements. */
 void	sa(t_cdl_list **top_a)
 {
-	if (list_len(*top_a) < 2)
+	if (!top_a || list_len(*top_a) < 2)
 		return ;
 	ft_putendl_fd("sa", STDOUT_FILENO);
 	try_swap(top_a);
@@ -28,7 +28,7 @@ void	sa(t_cdl_list **top_a)
    Do nothing if there is only one or no elements. */
 void	sb(t_cdl_list **top_b)
 {
-	if (list_len(*top_b) < 2)
+	if (!top_b || list_len(*top_b) < 2)
 		return ;
 	ft_putendl_fd("sb", STDOUT_FILENO);
 	try_swap(top_b);
@@ -46,6 +46,8 @@ static void	try_swap(t_cdl_list **top)
 {
 	int	swap_tmp;
 
+	if (!top || !(*top))
+		return ;
 	swap_tmp = (*top)->value;
 	(*top)->value = (*top)->next->value;
 	(*top)->next->value = swap_tmp;
