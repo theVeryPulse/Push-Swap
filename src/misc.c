@@ -6,15 +6,20 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:32:04 by Philip            #+#    #+#             */
-/*   Updated: 2023/12/29 17:33:05 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 15:09:07 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	error_msg(void)
+int	msg(t_msg msg)
 {
-	ft_putendl_fd("Error", STDOUT_FILENO);
+	if (msg == OK)
+		write(STDOUT_FILENO, "OK\n", 3);
+	else if (msg == KO)
+		write(STDOUT_FILENO, "KO\n", 3);
+	else if (msg == ERROR)
+		write(STDOUT_FILENO, "Error\n", 6);
 	return (0);
 }
 

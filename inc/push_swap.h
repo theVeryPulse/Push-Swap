@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 00:42:38 by Philip Li         #+#    #+#             */
-/*   Updated: 2024/01/04 14:07:24 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 15:07:45 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ typedef struct s_lists_info
 	int			dst_max;
 	int			dst_min;
 }	t_lists_info;
+
+typedef enum e_msg
+{
+	OK,
+	KO,
+	ERROR
+}	t_msg;
 
 /* List operations ========================================================== */
 
@@ -139,7 +146,7 @@ void		update_total_steps(t_step_track *step_track, t_step_track *target);
 
 /* Miscellaneous ------------------------------------------------------------ */
 
-int			error_msg(void);
+int			msg(t_msg);
 int			num(char c);
 
 #endif

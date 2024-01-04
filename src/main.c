@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 00:40:57 by Philip Li         #+#    #+#             */
-/*   Updated: 2024/01/02 22:37:52 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 15:08:48 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	t_cdl_list	*top_b;
 
 	if (is_invalid_input(argc, argv))
-		return (error_msg());
+		return (msg(ERROR));
 	top_a = NULL;
 	top_b = NULL;
 	i = 1;
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	if (list_has_duplicates(&top_a))
 	{
 		free_list(&top_a);
-		return (error_msg());
+		return (msg(ERROR));
 	}
 	if (!is_sorted(top_a))
 		sort(&top_a, &top_b);
