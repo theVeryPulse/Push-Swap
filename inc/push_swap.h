@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 00:42:38 by Philip Li         #+#    #+#             */
-/*   Updated: 2024/01/04 16:18:10 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 18:33:14 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_cdl_list	*list_pop(t_cdl_list **top);
 void		list_push(t_cdl_list **top, t_cdl_list *node_to_push);
 int			list_len(t_cdl_list *top);
 void		isolate_node(t_cdl_list *node);
-void		free_list(t_cdl_list **top);
+void		list_free(t_cdl_list **top);
 int			list_min(t_cdl_list *top);
 int			list_max(t_cdl_list *top);
 
@@ -152,7 +152,7 @@ void		update_total_steps(t_step_track *step_track, t_step_track *target);
 
 /* Miscellaneous ------------------------------------------------------------ */
 
-int			msg(t_msg);
+int			msg(t_msg msg);
 int			num(char c);
 
 #endif

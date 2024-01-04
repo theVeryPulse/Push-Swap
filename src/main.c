@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 00:40:57 by Philip Li         #+#    #+#             */
-/*   Updated: 2024/01/04 15:08:48 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 18:14:00 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	main(int argc, char **argv)
 	t_cdl_list	*top_a;
 	t_cdl_list	*top_b;
 
+	if (argc == 1)
+		return (0);
 	if (is_invalid_input(argc, argv))
 		return (msg(ERROR));
 	top_a = NULL;
@@ -27,10 +29,10 @@ int	main(int argc, char **argv)
 		list_append(&top_a, ft_atoi(argv[i++]));
 	if (list_has_duplicates(&top_a))
 	{
-		free_list(&top_a);
+		list_free(&top_a);
 		return (msg(ERROR));
 	}
 	if (!is_sorted(top_a))
 		sort(&top_a, &top_b);
-	free_list(&top_a);
+	list_free(&top_a);
 }

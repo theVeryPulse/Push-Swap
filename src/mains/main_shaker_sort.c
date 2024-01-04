@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 16:54:45 by Philip            #+#    #+#             */
-/*   Updated: 2023/12/15 19:41:33 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:33:37 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // static void	compare_and_swap(t_cdl_list *top_a)
 // {
 // 	if (top_a->value > top_a->next->value)
-// 		sa(&top_a);
+// 		sa(&top_a, PRINT);
 // }
 
 // int	main(int argc, char **argv)
@@ -43,7 +43,7 @@
 // 		{
 // 			i++;
 // 			if (top_a->value > top_a->next->value)
-// 				sa(&top_a);
+// 				sa(&top_a, PRINT);
 // 			if (is_sorted(start_point))
 // 				break ;
 // 			ra(&top_a);
@@ -57,7 +57,7 @@
 // 		{
 // 			i--;
 // 			if (top_a->value > top_a->next->value)
-// 				sa(&top_a);
+// 				sa(&top_a, PRINT);
 // 			if (is_sorted(start_point))
 // 				break ;
 // 			rra(&top_a);

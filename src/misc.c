@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:32:04 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/04 15:09:07 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 17:44:31 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	msg(t_msg msg)
 	else if (msg == KO)
 		write(STDOUT_FILENO, "KO\n", 3);
 	else if (msg == ERROR)
-		write(STDOUT_FILENO, "Error\n", 6);
+		write(STDERR_FILENO, "Error\n", 6);
 	return (0);
 }
 

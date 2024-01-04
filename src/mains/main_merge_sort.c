@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:46:02 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/04 16:24:56 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 17:43:28 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int	main(int argc, char **argv)
 		list_append(&top_a, ft_atoi(argv[i++]));
 	if (list_has_duplicates(&top_a))
 	{
-		free_list(&top_a);
+		list_free(&top_a);
 		return (msg(ERROR));
 	}
 	if (!is_sorted(top_a))
@@ -162,7 +162,7 @@ int	main(int argc, char **argv)
 		int size = list_len(top_a);
 		merge_sort(&top_a, &top_b, size);
 	}
-	free_list(&top_a);
+	list_free(&top_a);
 }
 
 

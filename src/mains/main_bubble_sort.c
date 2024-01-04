@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 16:54:45 by Philip            #+#    #+#             */
-/*   Updated: 2023/12/15 19:41:03 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:33:35 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 // 	{
 // 		if (top_a->next != start_point && top_a->value > top_a->next->value)
 // 		{
-// 			sa(&top_a);
+// 			sa(&top_a, PRINT);
 // 			// test_print_list(top_a, "A___"); ft_printf("sorted: %d\n", is_sorted(top_a)); /* test */
 // 		}
 // 		ra(&top_a);

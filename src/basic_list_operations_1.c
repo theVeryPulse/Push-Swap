@@ -6,13 +6,13 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:31:20 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/02 23:32:51 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 17:43:33 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_list(t_cdl_list **top)
+void	list_free(t_cdl_list **top)
 {
 	t_cdl_list	*node;
 
