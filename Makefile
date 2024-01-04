@@ -1,8 +1,16 @@
 NAME := push_swap
 CC := gcc
+
+SRC_DIR := ./src
+INC_DIR := ./inc
+LIBFT_INC_DIR := ./libft/inc
+BIN_DIR := ./bin
+
 CFLAGS := -Wall -Wextra -Werror
 
-SRC := main.c \
+STATIC_LIBFT := libft/lib/libft.a
+
+FILES := main.c \
 	basic_list_operations_0.c \
 	basic_list_operations_1.c \
 	input_check.c \
@@ -20,24 +28,41 @@ SRC := main.c \
 	sort_5.c \
 	\
 	misc.c
+SRC := $(addprefix $(SRC_DIR)/, $(FILES))
+OBJ := $(patsubst $(SRC_DIR)/%.c, $(BIN_DIR)/%.o, $(SRC))
 
-OBJ := $(SRC:.c=.o)
-
-LIBFT := libft/libft.a
-INC_DIR := -L libft
-LIB_DIR := -l ft
-
+CK_SRC := checker.c \
+	basic_list_operations_0.c \
+	basic_list_operations_1.c \
+	input_check.c \
+	\
+	operation_push.c \
+	operation_reverse_rotate.c \
+	operation_rotate.c \
+	operation_swap.c \
+	\
+	misc.c
+CK_OBJ := $(CK_OBJ:.c=.o)
 
 all : $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(OBJ) $(INC_DIR) $(LIB_DIR) -o $@
+$(NAME): $(STATIC_LIBFT) $(OBJ)
+	$(CC) $(OBJ) -o $@ $(CFLAGS) \
+	-I $(INC_DIR) \
+	-I $(LIBFT_INC_DIR) \
+	$(STATIC_LIBFT) \
 
-%.o : %.c
-	$(CC) $(CFLAGS) -c $<
+checker : $(LIBFT) $(CK_OBJ)
+	$(CC) 
 
-$(LIBFT): libft
-	$(MAKE) -C libft
+$(BIN_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(BIN_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ \
+	-I $(INC_DIR) \
+	-I $(LIBFT_INC_DIR) \
+
+$(STATIC_LIBFT):
+	$(MAKE) -C libft all
 
 clean :
 	rm -f $(OBJ)

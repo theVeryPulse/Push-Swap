@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 00:42:38 by Philip Li         #+#    #+#             */
-/*   Updated: 2024/01/03 20:12:25 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 14:07:24 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <limits.h>
-# include "libft/libft.h"
+# include "libft.h"
 
 typedef int	t_index;
 
