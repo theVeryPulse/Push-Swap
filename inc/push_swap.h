@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 00:42:38 by Philip Li         #+#    #+#             */
-/*   Updated: 2024/01/04 15:07:45 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:18:10 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,12 @@ typedef enum e_msg
 	ERROR
 }	t_msg;
 
+typedef enum e_print
+{
+	PRINT,
+	NOPRINT
+}	t_print;
+
 /* List operations ========================================================== */
 
 void		list_append(t_cdl_list **top, int value);
@@ -94,17 +100,17 @@ int			is_beyond_int(char *s);
 
 /* Designated operations ==================================================== */
 
-void		sa(t_cdl_list **top_a);
-void		sb(t_cdl_list **top_b);
-void		ss(t_cdl_list **top_a, t_cdl_list **top_b);
-void		pa(t_cdl_list **top_a, t_cdl_list **top_b);
-void		pb(t_cdl_list **top_a, t_cdl_list **top_b);
-void		ra(t_cdl_list **top_a);
-void		rb(t_cdl_list **top_b);
-void		rr(t_cdl_list **top_a, t_cdl_list **top_b);
-void		rra(t_cdl_list **top_a);
-void		rrb(t_cdl_list **top_b);
-void		rrr(t_cdl_list **top_a, t_cdl_list **top_b);
+void		sa(t_cdl_list **top_a, t_print p);
+void		sb(t_cdl_list **top_b, t_print p);
+void		ss(t_cdl_list **top_a, t_cdl_list **top_b, t_print p);
+void		pa(t_cdl_list **top_a, t_cdl_list **top_b, t_print p);
+void		pb(t_cdl_list **top_a, t_cdl_list **top_b, t_print p);
+void		ra(t_cdl_list **top_a, t_print p);
+void		rb(t_cdl_list **top_b, t_print p);
+void		rr(t_cdl_list **top_a, t_cdl_list **top_b, t_print p);
+void		rra(t_cdl_list **top_a, t_print p);
+void		rrb(t_cdl_list **top_b, t_print p);
+void		rrr(t_cdl_list **top_a, t_cdl_list **top_b, t_print p);
 
 /* Sorting related ========================================================== */
 

@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:12:34 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/03 20:29:21 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:28:39 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	sort_five_nodes(t_cdl_list **top_a, t_cdl_list **top_b)
 {
-	pb(top_a, top_b);
-	pb(top_a, top_b);
+	pb(top_a, top_b, PRINT);
+	pb(top_a, top_b, PRINT);
 	if ((*top_b)->value < (*top_b)->next->value)
-		sb(top_b);
+		sb(top_b, PRINT);
 	sort_three_nodes_a(top_a);
 	push_to_sorted_a(top_a, top_b);
 	bring_min_to_top_a(top_a);
@@ -48,9 +48,9 @@ void	push_to_sorted_a(t_cdl_list **top_a, t_cdl_list **top_b)
 	while (list_len(*top_b) > 0)
 	{
 		if (sort_push_ok(*top_b, *top_a, ASCENDING, NULL))
-			pa(top_a, top_b);
+			pa(top_a, top_b, PRINT);
 		else
-			rra(top_a);
+			rra(top_a, PRINT);
 	}
 }
 

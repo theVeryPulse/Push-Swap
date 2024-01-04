@@ -42,7 +42,7 @@
 // 	test_print_list(top_b, "B___");
 
 // 	/* sa */
-// 	sa(&top_a);
+// 	sa(&top_a, PRINT);
 // 	test_print_list(top_a, "A___"); ft_printf("sorted: %d\n", is_sorted(top_a));
 // 	test_print_list(top_b, "B___");
 
@@ -65,7 +65,7 @@
 // 	test_print_list(top_b, "B___");
 
 // 	/* sa */
-// 	sa(&top_a);
+// 	sa(&top_a, PRINT);
 // 	test_print_list(top_a, "A___"); ft_printf("sorted: %d\n", is_sorted(top_a));
 // 	test_print_list(top_b, "B___");
 

@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:46:02 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/04 15:08:41 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:24:56 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,13 @@ void	merge_sort(t_cdl_list **top_a, t_cdl_list **top_b, int len)
 		bool needs_sa = (*top_a)->value > (*top_a)->next->value;
 		bool needs_sb = (*top_b)->value < (*top_b)->next->value;
 		if (needs_sa && needs_sb)
-			ss(top_a, top_b);
+			ss(top_a, top_b, PRINT);
 		else if (needs_sa && !needs_sb)
-			sa(top_a);
+			sa(top_a, PRINT);
 		else if (!needs_sa && needs_sb)
-			sb(top_b);
-		rr(top_a, top_b);
-		rr(top_a, top_b);
+			sb(top_b, PRINT);
+		rr(top_a, top_b, PRINT);
+		rr(top_a, top_b, PRINT);
 		i += 2;
 	}
 	// if (i == len - 1)

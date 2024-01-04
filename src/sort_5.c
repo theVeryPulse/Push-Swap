@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:15:43 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/03 19:57:00 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:31:01 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	pb_n_times(t_cdl_list **top_a, t_cdl_list **top_b, int n)
 		return ;
 	while (n)
 	{
-		pb(top_a, top_b);
+		pb(top_a, top_b, PRINT);
 		n--;
 	}
 }
@@ -85,7 +85,7 @@ void	sort_the_rest(t_cdl_list **top_a, t_cdl_list **top_b)
 			all_ordered_rotates(st, top_a, NULL);
 		else
 			all_reverse_rotates(st, top_a, NULL);
-		pa(top_a, top_b);
+		pa(top_a, top_b, PRINT);
 		nodes_to_sort--;
 	}
 }

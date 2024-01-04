@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:18:36 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/03 20:12:09 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:30:49 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ void	rotate_and_pb(t_step_track target, t_cdl_list **top_a,
 {
 	all_ordered_rotates(target, top_a, top_b);
 	all_reverse_rotates(target, top_a, top_b);
-	pb(top_a, top_b);
+	pb(top_a, top_b, PRINT);
 }

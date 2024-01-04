@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 18:18:13 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/02 23:14:45 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:28:22 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	sort_two_nodes_a(t_cdl_list **top_a)
 	if (!top_a || !(*top_a))
 		return ;
 	if ((*top_a)->value > (*top_a)->next->value)
-		sa(top_a);
+		sa(top_a, PRINT);
 }
 
 /* Five unsorted cases: 
@@ -81,25 +81,25 @@ void	sort_three_nodes_a(t_cdl_list **top_a)
 	val_2 = (*top_a)->next->next->value;
 	if (val_0 > val_1 && val_1 > val_2)
 	{
-		sa(top_a);
-		rra(top_a);
+		sa(top_a, PRINT);
+		rra(top_a, PRINT);
 	}
 	else if (val_0 > val_2 && val_2 > val_1)
-		ra(top_a);
+		ra(top_a, PRINT);
 	else if (val_1 > val_0 && val_0 > val_2)
-		rra(top_a);
+		rra(top_a, PRINT);
 	else if (val_2 > val_0 && val_0 > val_1)
-		sa(top_a);
+		sa(top_a, PRINT);
 	else if (val_1 > val_2 && val_2 > val_0)
 	{
-		rra(top_a);
-		sa(top_a);
+		rra(top_a, PRINT);
+		sa(top_a, PRINT);
 	}
 }
 
 void	sort_four_nodes(t_cdl_list **top_a, t_cdl_list **top_b)
 {
-	pb(top_a, top_b);
+	pb(top_a, top_b, PRINT);
 	sort_three_nodes_a(top_a);
 	push_to_sorted_a(top_a, top_b);
 	bring_min_to_top_a(top_a);

@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:26:48 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/03 20:25:12 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:26:16 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,17 @@ void	all_ordered_rotates(t_step_track st, t_cdl_list **top_a,
 {
 	while (st.ra_steps)
 	{
-		ra(top_a);
+		ra(top_a, PRINT);
 		st.ra_steps--;
 	}
 	while (st.rb_steps)
 	{
-		rb(top_b);
+		rb(top_b, PRINT);
 		st.rb_steps--;
 	}
 	while (st.rr_steps)
 	{
-		rr(top_a, top_b);
+		rr(top_a, top_b, PRINT);
 		st.rr_steps--;
 	}
 }
@@ -93,17 +93,17 @@ void	all_reverse_rotates(t_step_track st, t_cdl_list **top_a,
 {
 	while (st.rra_steps)
 	{
-		rra(top_a);
+		rra(top_a, PRINT);
 		st.rra_steps--;
 	}
 	while (st.rrb_steps)
 	{
-		rrb(top_b);
+		rrb(top_b, PRINT);
 		st.rrb_steps--;
 	}
 	while (st.rrr_steps)
 	{
-		rrr(top_a, top_b);
+		rrr(top_a, top_b, PRINT);
 		st.rrr_steps--;
 	}
 }
