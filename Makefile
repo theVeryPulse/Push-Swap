@@ -72,11 +72,11 @@ $(STATIC_LIBFT):
 	$(MAKE) -C libft all
 
 clean :
-	rm -f $(OBJ)
+	rm -f ./bin/*.o
 	$(MAKE) -C libft clean
 
-fclean :
-	rm -f $(OBJ) $(NAME) checker
+fclean : clean
+	rm -f $(NAME) checker
 	$(MAKE) -C libft fclean
 
 re : fclean all
