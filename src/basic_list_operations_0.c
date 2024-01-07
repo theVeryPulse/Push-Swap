@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 16:52:05 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/06 21:39:19 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/07 20:55:29 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	list_push(t_cdl_list **top, t_cdl_list *node_to_push)
 {
 	int	len;
 
-	if (!top || !(*top) || !node_to_push)
+	if (!top || !node_to_push)
 		return ;
 	len = list_len(*top);
 	if (len == 0)
