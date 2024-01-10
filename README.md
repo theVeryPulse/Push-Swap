@@ -35,3 +35,8 @@ less significant.
 ## Final Score
 - For 100 elements, it takes on average 550 steps to sort.
 - For 500 elements, it takes on average 4950 steps to sort.
+
+
+
+## Note
+[libft](https://github.com/theVeryPulse/libft) is required under root directory for successful compilation.  
