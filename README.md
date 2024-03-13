@@ -49,8 +49,7 @@ $ ./push_swap 4 67 3 87 23
 This will output a series of instructions to that will sort the given integers in ascending order.
 
 ## Visualizer
-For a sorting visualization, [this visualizer](https://github.com/o-reo/push_swap_visualizer) by 
-ayogun is highly recommended.
+For a sorting visualization, [this visualizer](https://github.com/o-reo/push_swap_visualizer) is highly recommended.
 
 Sort 100 random numbers:
 
